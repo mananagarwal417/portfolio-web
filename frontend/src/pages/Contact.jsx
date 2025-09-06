@@ -4,37 +4,23 @@ import { SiX } from "react-icons/si";
 import axios from "axios";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    axios
-      .post("http://localhost:5000/user/contact", formData)
-      .then((response) => {
-        console.log("Form submitted successfully:");
-        alert(response.data.message);
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          alert(error.response.data.message); // Show backend message
-        } else {
-          alert("An error occurred. Please try again.");
-        }
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      await axios.post("https://getform.io/f/bvrmzeqb", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
+
+      form.reset(); // clear form fields
+     
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
