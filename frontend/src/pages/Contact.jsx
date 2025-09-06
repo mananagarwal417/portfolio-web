@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { SiX } from "react-icons/si";
 import axios from "axios";
 
 function Contact() {
-  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
 
     try {
+      setLoading(true);
       await axios.post("https://getform.io/f/bvrmzeqb", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "application/json" },
       });
 
-      form.reset(); // clear form fields
-     
+      setFormData({ name: "", email: "", message: "" }); // reset fields
+      setSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,6 +56,7 @@ function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
+              required
               className="w-full px-4 py-2 bg-black border border-gray-600 rounded-lg text-white font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
@@ -66,6 +74,7 @@ function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
+              required
               className="w-full px-4 py-2 bg-black border border-gray-600 rounded-lg text-white font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
@@ -83,6 +92,7 @@ function Contact() {
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
               }
+              required
               className="w-full px-4 py-2 bg-black border border-gray-600 rounded-lg text-white font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
           </div>
@@ -90,11 +100,18 @@ function Contact() {
           {/* Button */}
           <button
             type="submit"
-            className="w-full bg-cyan-500 text-black font-mono px-6 py-3 rounded-lg font-bold hover:bg-cyan-400 hover:scale-105 transition-transform"
+            disabled={loading}
+            className="w-full bg-cyan-500 text-black font-mono px-6 py-3 rounded-lg font-bold hover:bg-cyan-400 hover:scale-105 transition-transform disabled:opacity-50"
           >
-            <code>Send</code>
+            <code>{loading ? "Sending..." : "Send"}</code>
           </button>
         </form>
+
+        {submitted && (
+          <p className="mt-6 text-center text-green-400 font-mono font-bold">
+            ✅ Message sent successfully!
+          </p>
+        )}
 
         {/* Social Media Icons */}
         <div className="mt-10 flex justify-center space-x-6 text-white text-2xl">
