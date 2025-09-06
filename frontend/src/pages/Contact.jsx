@@ -49,7 +49,7 @@ function Contact() {
         </p>
 
         {/* Form */}
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-6" action='https://getform.io/f/bvrmzeqb' method='POST'>
           {/* Name */}
           <div>
             <label className="block mb-2 text-white font-mono">
