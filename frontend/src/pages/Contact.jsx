@@ -12,7 +12,9 @@ function Contact() {
     const formData = new FormData(form);
 
     try {
-      await axios.post("https://getform.io/f/bvrmzeqb", formData);
+      await axios.post("https://getform.io/f/bvrmzeqb", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       form.reset(); // clear form fields
      
