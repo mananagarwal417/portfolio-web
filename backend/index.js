@@ -1,6 +1,6 @@
 const express=require('express')
 const dotenv=require('dotenv')
-const { connectDB }=require('./connection')
+//const { connectDB }=require('./connection')
 const cors=require('cors')
 
 
@@ -15,11 +15,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 //connection to mongoDB
-connectDB();
+//connectDB();
 
 
 //routes
-app.use('/user',require('./routes/user'));
+//app.use('/user',require('./routes/user'));
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`Server is running on port ${process.env.PORT || 8000}`)
