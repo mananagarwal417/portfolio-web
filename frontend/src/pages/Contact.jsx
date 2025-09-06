@@ -108,9 +108,7 @@ function Contact() {
         </form>
 
         {submitted && (
-          <p className="mt-6 text-center text-green-400 font-mono font-bold">
-            ✅ Message sent successfully!
-          </p>
+          alert("Thank you for reaching out! I'll get back to you soon.")
         )}
 
         {/* Social Media Icons */}
