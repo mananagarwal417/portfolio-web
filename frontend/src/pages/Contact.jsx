@@ -4,29 +4,28 @@ import { SiX } from "react-icons/si";
 import axios from "axios";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+ const [result, setResult] = React.useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
 
-    try {
-      setLoading(true);
-      await axios.post("https://getform.io/f/bvrmzeqb", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+    formData.append("access_key", "634d35d2-c846-4b58-ad54-ec957ea66021");
 
-      setFormData({ name: "", email: "", message: "" }); // reset fields
-      setSubmitted(true);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    } finally {
-      setLoading(false);
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Form Submitted Successfully");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
     }
   };
 
