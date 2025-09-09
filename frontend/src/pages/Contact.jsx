@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 function Contact() {
   const [result, setResult] = useState("");
 
+  useEffect(() => {
+    if (result) {
+      alert(result);
+      setResult("");
+    }
+  }, [result]);
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setResult("Sending...");
 
     const form = event.target;
     const formData = new FormData(form);
@@ -105,16 +112,7 @@ function Contact() {
           </motion.button>
         </form>
 
-        {result && (
-          <motion.p
-            className="mt-4 text-center text-white font-mono"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {result}
-          </motion.p>
-        )}
+        
       </motion.div>
     </motion.div>
   );
