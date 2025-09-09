@@ -1,9 +1,15 @@
-import React from 'react'
-import ProjectCard from './ProjectCard'
+import React from 'react';
+import { motion } from 'framer-motion';
+import ProjectCard from './ProjectCard';
 
 function Project() {
   return (
-    <div className="min-h-screen bg-black text-white font-mono px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pt-16 sm:pt-20 md:pt-28 space-y-10">
+    <motion.div 
+      className="min-h-screen bg-black text-white font-mono px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pt-16 sm:pt-20 md:pt-28 space-y-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <section className="px-2 sm:px-4 md:px-6">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
           My Projects
@@ -12,20 +18,68 @@ function Project() {
           Here are some of the projects I've worked on:
         </p>
 
-        {/* Project cards */}
-        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
-          <ProjectCard
-            title="Portfolio"
-            description="A personal portfolio website."
-            tech={['React', 'JavaScript']}
-            link="https://example.com/project1"
-          />
+        {/* Project cards with animation */}
+        <motion.div
+          className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+        >
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6 }}
+          >
+            <ProjectCard
+              title="Portfolio"
+              description="A personal portfolio website."
+              tech={['React', 'JavaScript']}
+              link="https://example.com/project1"
+            />
+          </motion.div>
 
-          {/* Add more ProjectCard components here */}
-        </div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6 }}
+          >
+            <ProjectCard
+              title="E-Commerce"
+              description="An online store application."
+              tech={['React', 'Node.js', 'MongoDB']}
+              link="https://example.com/project2"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6 }}
+          >
+            <ProjectCard
+              title="Blog Platform"
+              description="A platform to create and share blogs."
+              tech={['React', 'Tailwind', 'Firebase']}
+              link="https://example.com/project3"
+            />
+          </motion.div>
+        </motion.div>
       </section>
-    </div>
-  )
+    </motion.div>
+  );
 }
 
-export default Project
+export default Project;
