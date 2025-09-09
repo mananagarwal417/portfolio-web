@@ -47,35 +47,9 @@ function Project() {
             />
           </motion.div>
 
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-          >
-            <ProjectCard
-              title="E-Commerce"
-              description="An online store application."
-              tech={['React', 'Node.js', 'MongoDB']}
-              link="https://example.com/project2"
-            />
-          </motion.div>
+          
 
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-          >
-            <ProjectCard
-              title="Blog Platform"
-              description="A platform to create and share blogs."
-              tech={['React', 'Tailwind', 'Firebase']}
-              link="https://example.com/project3"
-            />
-          </motion.div>
+          
         </motion.div>
       </section>
     </motion.div>
