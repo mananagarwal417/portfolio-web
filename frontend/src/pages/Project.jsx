@@ -45,7 +45,14 @@ function Project() {
               tech={['React', 'JavaScript']}
               link="https://example.com/project1"
             />
-          
+            </motion.div>
+            <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6 }}
+          >
            <ProjectCard
               title="Chatting Application"
               description="A chatting web application."
