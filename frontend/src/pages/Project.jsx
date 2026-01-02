@@ -43,7 +43,7 @@ function Project() {
               title="Portfolio"
               description="A personal portfolio website."
               tech={['React', 'JavaScript']}
-              link="https://example.com/project1"
+              link="https://manan-agarwal.vercel.app/"
             />
             </motion.div>
             <motion.div
