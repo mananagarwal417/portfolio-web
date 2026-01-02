@@ -45,8 +45,14 @@ function Project() {
               tech={['React', 'JavaScript']}
               link="https://example.com/project1"
             />
-          </motion.div>
-
+          
+           <ProjectCard
+              title="Chatting Application"
+              description="A chatting web application."
+              tech={['React', 'JavaScript', 'Socket.io', 'MongoDB']}
+              link="https://chatting-app-w172.vercel.app/"
+            />
+           </motion.div>
           
 
           
